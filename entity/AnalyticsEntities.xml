@@ -2,7 +2,7 @@
 <entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-2.1.xsd">
 
-    <entity entity-name="DateDimension" package="moqui.analytics.dimension" group="analytical">
+    <entity entity-name="DateDimension" package="mantle.analytics.dimension" group="analytical">
         <description>Date (days) dimension. The natural key is [dateValue]</description>
         <field name="dimensionId" type="id" is-pk="true">
             <description>Unique identifier of the Date dimension record</description>
@@ -48,7 +48,7 @@
         </field>
     </entity>
 
-    <entity entity-name="CurrencyDimension" package="moqui.analytics.dimension" group="analytical">
+    <entity entity-name="CurrencyDimension" package="mantle.analytics.dimension" group="analytical">
         <description>Currency dimension. The natural key is [currencyId]</description>
         <field name="dimensionId" type="id" is-pk="true">
             <description>Unique identifier of the Currency dimension record</description>
@@ -61,7 +61,7 @@
         </field>
     </entity>
 
-    <entity entity-name="ProductDimension" package="moqui.analytics.dimension.product" group="analytical">
+    <entity entity-name="ProductDimension" package="mantle.analytics.dimension.product" group="analytical">
         <description>Product dimension. The natural key is [productId]</description>
         <field name="dimensionId" type="id" is-pk="true">
             <description>Unique identifier of the Product dimension record</description>
@@ -76,7 +76,7 @@
         <field name="internalName" type="text-long"/>
     </entity>
 
-    <entity entity-name="SalesInvoiceItemFact" package="moqui.analytics.fact.accounting" group="analytical">
+    <entity entity-name="SalesInvoiceItemFact" package="mantle.analytics.fact.accounting" group="analytical">
         <description>A transaction fact entity with invoice item grain.</description>
         <field name="invoiceId" type="id" is-pk="true"/>
         <field name="invoiceItemSeqId" type="id" is-pk="true"/>
@@ -126,7 +126,7 @@
         </relationship>
     </entity>
 
-    <entity entity-name="SalesOrderItemFact" package="moqui.analytics.fact.order" group="analytical">
+    <entity entity-name="SalesOrderItemFact" package="mantle.analytics.fact.order" group="analytical">
         <description>A transaction fact entity with order item grain.</description>
         <field name="orderId" type="id" is-pk="true"/>
         <field name="orderItemSeqId" type="id" is-pk="true"/>
@@ -201,7 +201,7 @@
         </relationship>
     </entity>
 
-    <entity entity-name="InventoryItemFact" package="moqui.analytics.fact.product" group="analytical">
+    <entity entity-name="InventoryItemFact" package="mantle.analytics.fact.product" group="analytical">
         <description>A transaction fact entity with inventory item.</description>
         <field name="inventoryItemId" type="id" is-pk="true"/>
         <field name="facilityId" type="id"/>
@@ -223,14 +223,14 @@
         </relationship>
     </entity>
 
-    <entity entity-name="ShopifyOrderIdentFact" package="moqui.analytics.fact.order" group="analytical">
+    <entity entity-name="ShopifyOrderIdentFact" package="mantle.analytics.fact.order" group="analytical">
         <field name="orderId" type="id" is-pk="true"/>
         <field name="shopifyOrderId" type="id"/>
         <field name="shopifyOrderNumber" type="id"/>
         <field name="shopifyOrderName" type="text-medium"/>
     </entity>
 
-    <view-entity entity-name="SalesInvoiceItemStarSchema" package="moqui.analytics.starschema.accounting">
+    <view-entity entity-name="SalesInvoiceItemStarSchema" package="mantle.analytics.starschema.accounting">
         <description>Invoice Item star schema (Profit and Loss Statement).</description>
         <member-entity entity-alias="SIIF" entity-name="SalesInvoiceItemFact">
         </member-entity>
@@ -271,7 +271,7 @@
         </alias>
     </view-entity>
 
-    <view-entity entity-name="SalesOrderItemStarSchema" package="moqui.analytics.starschema.order">
+    <view-entity entity-name="SalesOrderItemStarSchema" package="mantle.analytics.starschema.order">
         <description>Order Item star schema (Profit and Loss Statement).</description>
         <member-entity entity-alias="SOIF" entity-name="SalesOrderItemFact" join-from-alias="SIIF">
             <key-map field-name="origCurrencyDimId" related="dimensionId"/>
@@ -336,7 +336,7 @@
         </alias>
     </view-entity>
 
-    <view-entity entity-name="InventoryItemSchema" package="moqui.analytics.starschema.product">
+    <view-entity entity-name="InventoryItemSchema" package="mantle.analytics.starschema.product">
         <description>"Inventory Item Schema.</description>
         <member-entity entity-alias="IIF" entity-name="InventoryItemFact" join-from-alias="SOIF">
             <key-map field-name="origCurrencyDimId" related="dimensionId"/>
